@@ -6,7 +6,7 @@
 In this paper, we analyze three different methods for polynomial regression in machine learning: Ordinary Least Squares, Ridge, and Lasso Regression. We evaluate their performance with mean squared error and $R^2$-score, and we explore data resampling techniques such as bootstrapping and $\textit{k}$-fold cross validation. First we fit the models to a two dimensional test function, and then to real mountain data from Norway. We find the Ordinary Least Squares to outperform both Ridge and Lasso in approximating real landscapes.
 
 ## Installation
-> **Note:** Running `main.py` is computationally heavy. 
+> **Note:** Running `main.py` is computationally heavy due to Lasso's optimization techniques. 
 
 Clone the repository and install dependencies:
 
