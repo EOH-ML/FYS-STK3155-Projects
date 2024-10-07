@@ -21,7 +21,7 @@ pip install -r requirements.txt
 To generate all the figures run: 
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 Results will be saved in the `figures/` folder.
