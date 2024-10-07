@@ -92,7 +92,7 @@ def plot_heatmap(heatmap_matrix, x_data, y_data, x_label, y_label, heatbar_label
 
     """
     plt.rc('text', usetex=True)
-    plt.rc('font', family='serif', size=12)
+    plt.rc('font', family='serif', size=6)
 
     # plt.figure(figsize=(10, 10))
     min_val_idx = np.unravel_index(np.argmin(heatmap_matrix), heatmap_matrix.shape)

@@ -244,29 +244,45 @@ def run_plots_max():
     x_f, y_f, z_f = create_data_franke(100, 0.1)
 
     plot_svd_vs_not(x_f, y_f, z_f, filename='svd_vs_not.png')
+    plt.close()
 
     mse_heatmap_k_fold(x_f, y_f, z_f, "Ridge", filename='mse_heatmap_k_fold_ridge_franke.png')
+    plt.close()
     mse_heatmap_k_fold(x_f, y_f, z_f, "Lasso", filename='mse_heatmap_k_fold_lasso_franke.png')
+    plt.close()
 
     mse_heatmap_k_fold(x, y, z, "Ridge", filename='mse_heatmap_k_fold_ridge_real_terrain.png', real_terrain=True)
+    plt.close()
     mse_heatmap_k_fold(x, y, z, "Lasso", filename='mse_heatmap_k_fold_lasso_real_terrain.png', real_terrain=True)
+    plt.close()
 
     bootstrap_bias_variance(x_f, y_f, z_f, "Ridge", filename='bias_variance_tradeoff_OLS_franke.png')
+    plt.close()
     bootstrap_bias_variance(x, y, z, "Ridge", filename='bias_variance_tradeoff_OLS_real_terrain.png')
+    plt.close()
 
     plot_betas_of_lambda(x_f, y_f, z_f, "Ridge", filename='betas_plot_of_lambda_ridge.png')
+    plt.close()
     plot_betas_of_lambda(x_f, y_f, z_f, "Lasso", filename='betas_plot_of_lambda_lasso.png')
+    plt.close()
 
     plot_betas_of_degree(x_f, y_f, z_f, "Ridge", filename='betas_plot_of_degree_OLS_franke.png')
+    plt.close()
     plot_betas_of_degree(x, y, z, "Ridge", filename='betas_plot_of_degree_OLS_real_terrain.png')
+    plt.close()
 
     plot_r2_heatmap(x_f, y_f, z_f, "Ridge", filename='r2_heatmap_ridge_franke.png')
+    plt.close()
     plot_r2_heatmap(x_f, y_f, z_f, "Lasso", filename='r2_heatmap_lasso_franke.png')
+    plt.close()
 
     plot_terrain(x, y, z, filename='real_terrain.png')
+    plt.close()
     plot_terrain(x_f, y_f, z_f, filename='franke_with_noise.png')
+    plt.close()
 
     plot_r2_score(x, y, z, filename='r2_score.png')
+    plt.close()
 
 if __name__ == '__main__':
     run_plots_max()
