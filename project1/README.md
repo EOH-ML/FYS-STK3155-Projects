@@ -24,7 +24,7 @@ To generate all the figures run:
 python3 main.py
 ```
 
-Results will be saved in the `figures/` folder.
+Results will be saved in a `src/figures/` folder.
 
 ## Contributors
 
