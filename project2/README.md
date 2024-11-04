@@ -34,18 +34,15 @@ pip install -r requirements.txt
 To generate all the figures and run tests: 
 
 ```bash
-cd optimizers
-python3 main_optimization.py
-cd ../neuralnetwork
-python3 test_neural_network.py
-python3 test_torch_ffnn.py
-python3 main_franke.py
-python3 main_wisconsin.py
-cd ../logistic_regression
-python3 main_logistic.py
+python3 run_all.py
 ```
 
 Results will be saved in a `project2/figures/` folder.
+
+There is also an alternative file that keeps track of your CO2 emmisions, to run (can only be run with `python3`):
+```bash
+python3 run_all_emmisions.py
+```
 
 ## Contributors
 
