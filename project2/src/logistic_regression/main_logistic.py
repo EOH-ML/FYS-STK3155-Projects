@@ -148,7 +148,7 @@ def best_test_accuracy(filepath:str=None):
         y_label='Accuracy',
         title='Accuracy of best models',
         filename=f'{filepath}/bars_best_models.png',
-        is_minimal=True
+        is_minimal=False
     )
 
 if __name__=="__main__":
