@@ -305,7 +305,7 @@ if __name__ == "__main__":
                           title='MSE as function of epoch and batch size for Adam with OLS, epsilon = 0.4, rho1 = 0.9 and rho2 = 0.999',
                             filename=f'{filepath}/MSE_epoch_batch_OLS_Adam_epsilon_4e-1_rho1_9e-1_rho2_999e-4.png')
 
-     print("Hold tight. Almost there now...")
+    print("Hold tight. Almost there now...")
     
     # Heatmap for Ridge, given epochs/momentum and batch sizes for various alphas, and also GD for eta and momentum
     for alpha in alphas:
