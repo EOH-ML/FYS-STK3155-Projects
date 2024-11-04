@@ -157,6 +157,8 @@ if __name__=="__main__":
     filepath = '../../figures/logreg_wisconsin'
     warnings.filterwarnings("ignore", category=RuntimeWarning)
 
+    print("\nWorking on logistic regression testing")
+
     # Logistic regression: accuracy on training and validation sets
     accuracy_train_val(filepath=filepath)
     print("Logistic regression: accuracy on training and validation sets completed.")
