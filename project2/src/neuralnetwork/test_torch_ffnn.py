@@ -25,6 +25,17 @@ from torch.utils.data import DataLoader, TensorDataset
 np.random.seed(42)
 torch.manual_seed(42)
 
+def create_folder_in_current_directory(folder_name):
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    
+    new_folder_path = os.path.join(current_directory, folder_name)
+    
+    if not os.path.exists(new_folder_path):
+        os.makedirs(new_folder_path)
+        print(f"Folder '{folder_name}' created successfully at: {new_folder_path}")
+    else:
+        print(f"Folder '{folder_name}' already exists at: {new_folder_path}")
+
 def franke_custom_vs_torch(filepath:str = None, verbose:bool = False):
 
     epochs = 5
