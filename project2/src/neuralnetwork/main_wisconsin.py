@@ -564,7 +564,9 @@ if __name__ == "__main__":
     filepath = '../../figures/wisconsin_nn'
     warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-        # Initialize biases
+    print("Working on Neural Network for Wisconsin Breast Cancer dataset...")
+    
+    # Initialize biases
     bias_initialization(filepath=filepath)
     print("Bias initialization completed.")
 
@@ -599,3 +601,5 @@ if __name__ == "__main__":
     # Wisconsin batch size with same number of iterations
     wisonsin_batch_size_with_same_nr_iterations(filepath=filepath)
     print("Wisconsin batch size with the same number of iterations completed.")
+
+    print("Done with Neural Network for Wisconsin Breast Cancer dataset...")
