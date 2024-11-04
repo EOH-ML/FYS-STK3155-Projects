@@ -241,6 +241,8 @@ if __name__ == "__main__":
     create_folder_in_current_directory('../../figures/figures_GD')
     filepath = '../../figures/figures_GD'
 
+    print("Working on optimizers...")
+    
     n = 100
     x = np.linspace(0, 1, n)
 
@@ -282,6 +284,7 @@ if __name__ == "__main__":
                                title='MSE as function of epsilon and batch size for adaGrad with OLS, epoch = 20',
                                filename=f'{filepath}/MSE_batch_epsilon_OLS_adaGrad_epoch20.png')
 
+    
     # Heatmap for OLS, given epochs and batch sizes, for RMSProp, epsilon = 0.99, rho = 0.9
     RMSProp_batch_epoch_size(X=X, y_true=y_true, cost=ols, 
                              title='MSE as function of epoch and batch size for RMSProp with OLS, epsilon = 0.99, rho = 0.9',
@@ -301,6 +304,9 @@ if __name__ == "__main__":
     ADAM_batch_epoch_size(X=X, y_true=y_true, cost=ols, epsilon=0.4,
                           title='MSE as function of epoch and batch size for Adam with OLS, epsilon = 0.4, rho1 = 0.9 and rho2 = 0.999',
                             filename=f'{filepath}/MSE_epoch_batch_OLS_Adam_epsilon_4e-1_rho1_9e-1_rho2_999e-4.png')
+
+     print("Hold tight. Almost there now...")
+    
     # Heatmap for Ridge, given epochs/momentum and batch sizes for various alphas, and also GD for eta and momentum
     for alpha in alphas:
         GD_eta_momentum(X=X, y_true=y_true, cost=ridge, alpha=alpha,
@@ -319,4 +325,6 @@ if __name__ == "__main__":
     adaGrad_alpha_epsilon(X=X, y_true=y_true, cost=ridge, 
                           title='MSE as function of alpha and epsilon for adaGrad, batch = 4 and epoch = 20',
                           filename=f'{filepath}/MSE_alpha_epsilon_adaGrad_ridge_batch4_epoch20.png')
+
+    print("Done with optimizers.")
 
