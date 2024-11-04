@@ -127,11 +127,9 @@ def validate_scikit():
     print("SCIKIT Test Set Accuracy:", accuracy)
     print('\n\n\n')
 
-
 def best_test_accuracy(filepath:str=None):
     best_logreg_models, X_test_scaled, y_test = accuracy_lambda_batch_size(filepath=filepath, n_best=5)
     
-    # Initialize lists for accuracies and model labels
     accuracies = []
     model_labels = []
 
@@ -140,14 +138,17 @@ def best_test_accuracy(filepath:str=None):
         y_pred = model.feed_forward(X_test_scaled) >= 0.5
         acc = accuracy_score(y_pred=y_pred, y_true=y_test)
         accuracies.append(acc)
-        model_labels.append(f'Model {i+1}')
+        model_labels.append(f'{i+1}')
+
     Plotting().plot_bar(
-        x_label='model',
         bar_labels=model_labels,
         y_values=accuracies,
         y_lims=(0.85, 1),
+        x_label='Model',
         y_label='Accuracy',
-        filename=f'{filepath}/bars_best_models.png'
+        title='Accuracy of best models',
+        filename=f'{filepath}/bars_best_models.png',
+        is_minimal=False
     )
 
 if __name__=="__main__":

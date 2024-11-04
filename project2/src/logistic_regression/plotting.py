@@ -211,14 +211,34 @@ class Plotting:
         if filename:
             self._save_file(filename)
         
-    def plot_bar(self, bar_labels, y_values, y_lims, x_label:str='x', y_label:str='y', width:float=0.4, filename:str=None):
+    def plot_bar(self, bar_labels, y_values, y_lims, x_label:str='x', y_label:str='y', title:str='title', width:float=0.4, filename:str=None, is_minimal:bool=False):
         colors, _ = self._colors_lines()
 
+        if is_minimal:
+            plt.figure(figsize=(5, 5))
+            plt.rc('font', size=20)
+            plt.xticks(fontsize=20)
+            plt.yticks(fontsize=20)
+            plt.locator_params(axis='x', nbins=5)
+            plt.locator_params(axis='y', nbins=5)
+        else:
+            plt.figure()
+            plt.rc('font', size=12)
+            plt.title(title)
+
+        # Plot the bars
         plt.bar(bar_labels, y_values, color=colors, width=width)
-        plt.xlabel("Models")
-        plt.ylabel("Accuracy")
-        plt.title("Test Accuracy of Each Model")
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
         plt.ylim(y_lims[0], y_lims[1])  
+
+        # Find the highest bar
+        max_y = max(y_values)
+        max_index = y_values.index(max_y)
+        max_x = bar_labels[max_index]
+
+        # Annotate the highest bar with its value
+        plt.text(max_x, max_y, f'{max_y:.3f}', ha='center', va='bottom', fontsize=20)
 
         if filename:
             self._save_file(filename)

@@ -3,4 +3,5 @@ matplotlib
 seaborn
 scikit-learn
 torch
-
+jax
+codecarbon
