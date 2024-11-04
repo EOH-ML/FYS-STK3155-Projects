@@ -165,7 +165,7 @@ def franke_custom_vs_torch(filepath:str = None, verbose:bool = False):
     x_label = 'Epochs'
     y_label = 'MSE'
     title = 'Training and Validation MSE for Custom NN and PyTorch Model'
-    box_string = '10 nevroner, 2 lag, 30 epoker, batch size=4, sigmoid, SGD, loss=MSE'
+    box_string = '10 neurons, 2 layers, 30 epochs, batch size=4, sigmoid, SGD, loss=MSE'
 
     # Kall plot_1d funksjonen
     plotting.plot_1d(
@@ -174,7 +174,7 @@ def franke_custom_vs_torch(filepath:str = None, verbose:bool = False):
         x_label=x_label,
         y_label=y_label,
         title=title,
-        filename=filepath,
+        filename=f'{filepath}/franke_custom_vs_torch.png',
         box_string=box_string
     )
 
@@ -332,7 +332,7 @@ def wisconsin_custom_vs_torch(filepath:str = None, verbose:bool = False):
         x_label=x_label,
         y_label=y_label,
         title=title,
-        filename=filepath,
+        filename=f'{filepath}/wisconsin_custom_vs_torch.png',
         box_string=box_string
     )
 
@@ -345,7 +345,7 @@ if __name__ == '__main__':
 
     print("\nWorking on testing with PyTorch")
     
-    franke_custom_vs_torch(filepath='franke_custom_vs_torch.png', verbose=True)
-    wisconsin_custom_vs_torch(filepath='wisconsin_custom_vs_torch.png', verbose=True)
+    franke_custom_vs_torch(filepath=filepath, verbose=True)
+    wisconsin_custom_vs_torch(filepath=filepath, verbose=True)
 
     print("\nDone with testing PyTorch.")
