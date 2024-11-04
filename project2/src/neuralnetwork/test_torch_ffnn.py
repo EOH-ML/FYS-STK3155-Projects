@@ -342,5 +342,10 @@ if __name__ == '__main__':
     create_folder_in_current_directory('../../figures')
     create_folder_in_current_directory('../../figures/torch_testing')
     filepath = '../../figures/torch_testing'
+
+    print("\nWorking on testing with PyTorch")
+    
     franke_custom_vs_torch(filepath='franke_custom_vs_torch.png', verbose=True)
     wisconsin_custom_vs_torch(filepath='wisconsin_custom_vs_torch.png', verbose=True)
+
+    print("\nDone with testing PyTorch.")
