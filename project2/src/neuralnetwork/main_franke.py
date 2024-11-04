@@ -598,6 +598,8 @@ if __name__=="__main__":
     filepath = '../../figures/Franke_nn'
     warnings.filterwarnings("ignore", category=RuntimeWarning)
 
+    print("Working on Neural Network for Franke's Function...")
+    
     # Lambda learning rate MSE and R2
     lambda_learningrate_mse_r2(filepath=filepath)
     print("Lambda learning rate MSE and R2 analysis completed.")
@@ -633,3 +635,5 @@ if __name__=="__main__":
     # Prediction plot for Franke function
     pred_plot_franke(filepath=filepath)
     print("Prediction plot for Franke function completed.")
+
+    print("Done with Neural Network for Franke's Function.")
