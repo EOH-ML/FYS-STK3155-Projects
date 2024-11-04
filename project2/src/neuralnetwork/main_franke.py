@@ -452,14 +452,14 @@ def lambda_learningrate_mse_r2(filepath:str=None):
     lambdas = [0] + [10**l for l in range(-7, 2)]
     learning_rates = [0.001, 0.005, 0.009, 0.01, 0.05, 0.09, 0.1]
     epochs = 30
-    n_splits = 5
+    n_splits = 2
 
     heatmap_mse = np.zeros((len(lambdas), len(learning_rates)))
     heatmap_r2 = np.zeros((len(lambdas), len(learning_rates)))
 
     kf = KFold(n_splits=n_splits)
 
-    for (train_index, val_index) in kf.split(X_train_scaled):
+    for k,(train_index, val_index) in enumerate(kf.split(X_train_scaled)):
         for i, lmd in enumerate(lambdas):
             for j, lr in enumerate(learning_rates):
                 nn = NeuralNetwork(input_size=2, 
@@ -474,11 +474,11 @@ def lambda_learningrate_mse_r2(filepath:str=None):
 
                 ss_res = np.sum((z_train[val_index] - predict)**2)
                 ss_tot = np.sum((z_train[val_index] - np.mean(z_train[val_index]))**2)
-                r2_score = (ss_res/ss_tot)
+                r2_score = 1-(ss_res/ss_tot)
 
                 heatmap_mse[i, j] += mse
                 heatmap_r2[i, j] += r2_score
-        print(f'Working on heatmap Franke function, fold = {i + 1}/{n_splits}')
+        print(f'Working on heatmap Franke function, fold = {k + 1}/{n_splits}')
     heatmap_mse /= n_splits
     heatmap_r2 /= n_splits
     if mse_plot:
@@ -604,36 +604,36 @@ if __name__=="__main__":
     lambda_learningrate_mse_r2(filepath=filepath)
     print("Lambda learning rate MSE and R2 analysis completed.")
 
-    # Train and validate on the Franke function
-    train_val_franke(filepath=filepath)
-    print("Training and validation on the Franke function completed.")
+    # # Train and validate on the Franke function
+    # train_val_franke(filepath=filepath)
+    # print("Training and validation on the Franke function completed.")
 
-    # Bias initialization with sigmoid activation
-    bias_initialization_sigmoid(filepath=filepath)
-    print("Bias initialization with sigmoid activation completed.")
+    # # Bias initialization with sigmoid activation
+    # bias_initialization_sigmoid(filepath=filepath)
+    # print("Bias initialization with sigmoid activation completed.")
 
-    # Franke function activation functions and learning rates
-    franke_activation_fns_learning_rates(filepath=filepath)
-    print("Franke activation functions and learning rates analysis completed.")
+    # # Franke function activation functions and learning rates
+    # franke_activation_fns_learning_rates(filepath=filepath)
+    # print("Franke activation functions and learning rates analysis completed.")
 
-    # Franke function number of layers
-    franke_number_of_layers(filepath=filepath)
-    print("Franke function number of layers analysis completed.")
+    # # Franke function number of layers
+    # franke_number_of_layers(filepath=filepath)
+    # print("Franke function number of layers analysis completed.")
 
-    # Franke function number of neurons
-    franke_number_of_neurons(filepath=filepath)
-    print("Franke function number of neurons analysis completed.")
+    # # Franke function number of neurons
+    # franke_number_of_neurons(filepath=filepath)
+    # print("Franke function number of neurons analysis completed.")
 
-    # MSE batch size analysis
-    mse_batch_size(filepath=filepath)
-    print("MSE batch size analysis completed.")
+    # # MSE batch size analysis
+    # mse_batch_size(filepath=filepath)
+    # print("MSE batch size analysis completed.")
 
-    # MSE batch size with fixed iterations
-    mse_batch_size_fixed_iterations(filepath=filepath)
-    print("MSE batch size with fixed iterations analysis completed.")
+    # # MSE batch size with fixed iterations
+    # mse_batch_size_fixed_iterations(filepath=filepath)
+    # print("MSE batch size with fixed iterations analysis completed.")
 
-    # Prediction plot for Franke function
-    pred_plot_franke(filepath=filepath)
-    print("Prediction plot for Franke function completed.")
+    # # Prediction plot for Franke function
+    # pred_plot_franke(filepath=filepath)
+    # print("Prediction plot for Franke function completed.")
 
-    print("Done with Neural Network for Franke's Function.")
+    # print("Done with Neural Network for Franke's Function.")
