@@ -612,9 +612,9 @@ if __name__=="__main__":
     bias_initialization_sigmoid(filepath=filepath)
     print("Bias initialization with sigmoid activation completed.")
 
-    # Franke function activation functions and learning rates
-    franke_activation_fns_learning_rates(filepath=filepath)
-    print("Franke activation functions and learning rates analysis completed.")
+    # Deactivated: Franke function activation functions and learning rates
+    #franke_activation_fns_learning_rates(filepath=filepath)
+    #print("Franke activation functions and learning rates analysis completed.")
 
     # Franke function number of layers
     franke_number_of_layers(filepath=filepath)
