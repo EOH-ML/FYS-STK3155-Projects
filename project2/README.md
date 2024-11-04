@@ -23,6 +23,7 @@ To generate all the figures and run tests:
 ```bash
 python3 optimizers/main_optimization.py
 python3 neuralnetwork/test_neural_network.py
+python3 neuralnetwork/test_torch_ffnn.py
 python3 neuralnetwork/main_franke.py
 python3 neuralnetwork/main_wisconsin.py
 python3 logistic_regression/main_logistic.py
