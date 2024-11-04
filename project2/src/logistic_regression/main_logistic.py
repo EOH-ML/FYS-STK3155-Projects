@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from plotting import Plotting
-from logistic_regression_alt import OwnLogisticRegression
+from logistic_regression import OwnLogisticRegression
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
