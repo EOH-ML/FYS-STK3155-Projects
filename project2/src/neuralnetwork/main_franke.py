@@ -1,8 +1,8 @@
 import os
-import warnings
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 from plotting import Plotting
 from neural_network import NeuralNetwork
 from franke import create_data_franke
@@ -12,8 +12,6 @@ from sklearn.model_selection import train_test_split, KFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 from sklearn.metrics import r2_score
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
-
 
 def create_folder_in_current_directory(folder_name):
     current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -26,90 +24,19 @@ def create_folder_in_current_directory(folder_name):
     else:
         print(f"Folder '{folder_name}' already exists at: {new_folder_path}")
 
-def FrankeFunction(x, y):
-    term1 = 0.75*np.exp(-(9*x - 2)**2 / 4.0 - (9*y - 2)**2 / 4.0)
-    term2 = 0.75*np.exp(-(9*x + 1)**2 / 49.0 - (9*y + 1)/10.0)
-    term3 = 0.5*np.exp(-(9*x - 7)**2 / 4.0 - (9*y - 3)**2 / 4.0)
-    term4 = -0.2*np.exp(-(9*x - 4)**2 - (9*y - 7)**2)
-    return term1 + term2 + term3 + term4
-
 def get_franke(n, split=True):
-    # Generer gridet
-    x = np.linspace(0, 1, n)
-    y = np.linspace(0, 1, n)
-    x_grid, y_grid = np.meshgrid(x, y)
-    x_flat = x_grid.ravel()
-    y_flat = y_grid.ravel()
-    X = np.c_[x_flat, y_flat]
-    z = FrankeFunction(x_flat, y_flat).reshape(-1, 1)
+    x, y, z = create_data_franke(n, 0.1)
+    z = z.ravel().reshape(-1, 1)
+    X = np.column_stack((x.ravel(), y.ravel()))
+    if split == False:
+        return x, y, X, z
+    X_train, X_test, z_train, z_test = train_test_split(X, z, test_size=0.2, random_state=42)
 
-    if split:
-        # Del dataene i trenings- og testsett
-        X_train, X_test, z_train, z_test = train_test_split(
-            X, z, test_size=0.2, random_state=42)
-        return X_train, X_test, z_train, z_test
-    else:
-        # Returner hele datasettet uten splitting
-        return x_grid, y_grid, X, z
-
-def pred_plot_franke(filepath:str=None): 
-    n = 100  
-    X_train, X_test, z_train, z_test = get_franke(n)
-    
-    x_grid, y_grid, X_full, z_full = get_franke(n, split=False)
-    
-    scaler_input = StandardScaler()
-    X_train_scaled = scaler_input.fit_transform(X_train)
-    X_test_scaled = scaler_input.transform(X_test)
-    X_full_scaled = scaler_input.transform(X_full)
-    
-    scaler_output = StandardScaler()
-    z_train_scaled = scaler_output.fit_transform(z_train)
-    z_test_scaled = scaler_output.transform(z_test)
-    
-    nn = NeuralNetwork(input_size=2,
-                       layer_sizes=[10, 10, 1], 
-                       activation_funcs=[sigmoid, sigmoid, linear],
-                       loss='mse')
-    optimizer = GradientDescent(learning_rate=0.01, momentum=0.0, nn=nn)
-    nn.train(X_train_scaled, z_train_scaled, epochs=30, batch_size=4, optimizer=optimizer, lmd=1e-7)
-    
-    predict_scaled = nn.feed_forward(X_full_scaled)
-    predict = scaler_output.inverse_transform(predict_scaled)
-    
-    z_pred = predict.reshape(n, n)
-    
-    plt.figure(figsize=(5, 5))
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='serif', size=18)
-    ax = plt.axes(projection='3d')
-    
-    plot = ax.plot_surface(x_grid, y_grid, z_pred, cmap=plt.cm.terrain, linewidth=0, antialiased=True)
-    
-    ax.xaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)
-    ax.yaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)  
-    ax.zaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)  
-
-    plt.xticks(fontsize=16)
-    plt.yticks(fontsize=16)
-    ax.zaxis.set_tick_params(labelsize=16)
-    
-    plt.locator_params(axis='x', nbins=5)
-    plt.locator_params(axis='y', nbins=5)
-    
-    ax.zaxis.set_major_locator(LinearLocator(5))
-    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
-    
-    ax.set_xlabel(r'\textbf{x}', fontsize=18)
-    ax.set_ylabel(r'\textbf{y}', fontsize=18)
-    ax.set_zlabel(r'\textbf{$f$}', fontsize=18)
-    
-    if filepath:
-        plt.savefig(f'{filepath}/franke_nn_3d.png', format='png', dpi=300, bbox_inches='tight')
-        plt.close()
-    else:
-        plt.show()
-
+    # Standardize with scikit-learn
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    return X_train_scaled, X_test_scaled, z_train, z_test
 
 def franke_activation_fns_learning_rates(filepath:str=None):
     
@@ -459,7 +386,7 @@ def lambda_learningrate_mse_r2(filepath:str=None):
 
     kf = KFold(n_splits=n_splits)
 
-    for k,(train_index, val_index) in enumerate(kf.split(X_train_scaled)):
+    for (train_index, val_index) in kf.split(X_train_scaled):
         for i, lmd in enumerate(lambdas):
             for j, lr in enumerate(learning_rates):
                 nn = NeuralNetwork(input_size=2, 
@@ -474,11 +401,10 @@ def lambda_learningrate_mse_r2(filepath:str=None):
 
                 ss_res = np.sum((z_train[val_index] - predict)**2)
                 ss_tot = np.sum((z_train[val_index] - np.mean(z_train[val_index]))**2)
-                r2_score = 1-(ss_res/ss_tot)
+                r2_score = 1 - (ss_res/ss_tot)
 
                 heatmap_mse[i, j] += mse
                 heatmap_r2[i, j] += r2_score
-        print(f'Working on heatmap Franke function, fold = {k + 1}/{n_splits}')
     heatmap_mse /= n_splits
     heatmap_r2 /= n_splits
     if mse_plot:
@@ -592,48 +518,92 @@ def bias_initialization_sigmoid(filepath:str=False, show_text:bool=False):
 
     plt.close()
 
+def pred_plot_franke(filepath:str=None): 
+    n = 100  # Antall punkter i hver dimensjon
+    # Hent trenings- og testsett uten skalering
+    X_train, X_test, z_train, z_test = get_franke(n=n)
+    
+    # Hent hele datasettet uten splitting for plotting
+    x_grid, y_grid, X_full, z_full = get_franke(n=n, split=False)
+    
+    # Skaler inputdataene
+    scaler_input = StandardScaler()
+    X_train_scaled = scaler_input.fit_transform(X_train)
+    X_test_scaled = scaler_input.transform(X_test)
+    X_full_scaled = scaler_input.transform(X_full)
+    
+    # Skaler outputdataene
+    scaler_output = StandardScaler()
+    z_train_scaled = scaler_output.fit_transform(z_train)
+    z_test_scaled = scaler_output.transform(z_test)
+    
+    # Definer og tren nevralt nettverk
+    nn = NeuralNetwork(input_size=2,
+                       layer_sizes=[10, 10, 1], 
+                       activation_funcs=[sigmoid, sigmoid, linear],
+                       loss='mse')
+    optimizer = GradientDescent(learning_rate=0.01, momentum=0.0, nn=nn)
+    nn.train(X_train_scaled, z_train_scaled, epochs=30, batch_size=4, optimizer=optimizer, lmd=1e-7)
+    
+    # Lag prediksjoner på det skalerte gridet
+    predict_scaled = nn.feed_forward(X_full_scaled)
+    # Invers skaler prediksjonene
+    predict = scaler_output.inverse_transform(predict_scaled)
+    
+    # Reshape prediksjonene for plotting
+    z_pred = predict.reshape(n, n)
+    
+    # Plotting
+    # Sett opp figuren og akser
+    plt.figure(figsize=(5, 5))
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif', size=18)
+    ax = plt.axes(projection='3d')
+    
+    # Plot overflaten
+    plot = ax.plot_surface(x_grid, y_grid, z_pred, cmap=plt.cm.terrain, linewidth=0, antialiased=True)
+    
+    # Juster fargene på rutenettet
+    ax.xaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)
+    ax.yaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)  
+    ax.zaxis._axinfo["grid"].update(color='lightgray', linewidth=0.5)  
+    
+    # Mindre fontstørrelse på aksetallene
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    ax.zaxis.set_tick_params(labelsize=16)
+    
+    # Færre ticks på aksene
+    plt.locator_params(axis='x', nbins=5)
+    plt.locator_params(axis='y', nbins=5)
+    # Fjern eller kommenter ut følgende linje siden den ikke påvirker z-aksen i 3D-plot
+    # plt.locator_params(axis='z', nbins=5)
+    
+    # Sett antall ticks på z-aksen til ønsket antall, for eksempel 5
+    ax.zaxis.set_major_locator(LinearLocator(5))
+    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+    
+    # Sett akseetiketter med LaTeX-format
+    ax.set_xlabel(r'\textbf{x}', fontsize=18)
+    ax.set_ylabel(r'\textbf{y}', fontsize=18)
+    ax.set_zlabel(r'\textbf{$f$}', fontsize=18)
+    
+    # Lagre figuren hvis filepath er angitt
+    if filepath:
+        plt.savefig(f'{filepath}/franke_nn_3d.png', format='png', dpi=300, bbox_inches='tight')
+        plt.close()
+    else:
+        plt.show()
+
 if __name__=="__main__":
     create_folder_in_current_directory('../../figures')
     create_folder_in_current_directory('../../figures/Franke_nn')
     filepath = '../../figures/Franke_nn'
-    warnings.filterwarnings("ignore", category=RuntimeWarning)
-
-    print("Working on Neural Network for Franke's Function...")
-    
-    # Lambda learning rate MSE and R2
     lambda_learningrate_mse_r2(filepath=filepath)
-    print("Lambda learning rate MSE and R2 analysis completed.")
-
-    # Train and validate on the Franke function
     train_val_franke(filepath=filepath)
-    print("Training and validation on the Franke function completed.")
-
-    # Bias initialization with sigmoid activation
     bias_initialization_sigmoid(filepath=filepath)
-    print("Bias initialization with sigmoid activation completed.")
-
-    # Deactivated: Franke function activation functions and learning rates
-    #franke_activation_fns_learning_rates(filepath=filepath)
-    #print("Franke activation functions and learning rates analysis completed.")
-
-    # Franke function number of layers
+    franke_activation_fns_learning_rates(filepath=filepath)
     franke_number_of_layers(filepath=filepath)
-    print("Franke function number of layers analysis completed.")
-
-    # Franke function number of neurons
     franke_number_of_neurons(filepath=filepath)
-    print("Franke function number of neurons analysis completed.")
-
-    # MSE batch size analysis
     mse_batch_size(filepath=filepath)
-    print("MSE batch size analysis completed.")
-
-    # MSE batch size with fixed iterations
     mse_batch_size_fixed_iterations(filepath=filepath)
-    print("MSE batch size with fixed iterations analysis completed.")
-
-    # Prediction plot for Franke function
-    pred_plot_franke(filepath=filepath)
-    print("Prediction plot for Franke function completed.")
-
-    print("Done with Neural Network for Franke's Function.")
