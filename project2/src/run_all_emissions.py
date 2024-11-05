@@ -19,5 +19,5 @@ for root, dirs, files in os.walk(current_dir):
             # Run each selected file in its respective directory
             subprocess.run(['python3', filename], cwd=root, check=True)
 
-emissions = tracker.stop()
-print(f"Total emissions: {emissions['emissions_kg']*1_000_000} mg CO2")
+emissions : float = tracker.stop()
+print(f"Total emissions for this run: {round(emissions * 1_000_000, 5)} mg CO2")
