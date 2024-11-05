@@ -39,7 +39,7 @@ python3 run_all.py
 
 Results will be saved in a `project2/figures/` folder.
 
-There is also an alternative file that keeps track of your CO2 emmisions, to run (can only be run with `python3`):
+There is also an alternative run that keeps track of the power usage of all the test runs combined, using `CodeCarbon` to track your CO2. Note: `CodeCarbon` might require your system password to keep track of your CPU, GPU and RAM's power usage. Can only be run with `python3`:
 ```bash
 python3 run_all_emissions.py
 ```
