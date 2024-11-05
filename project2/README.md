@@ -41,7 +41,7 @@ Results will be saved in a `project2/figures/` folder.
 
 There is also an alternative file that keeps track of your CO2 emmisions, to run (can only be run with `python3`):
 ```bash
-python3 run_all_emmisions.py
+python3 run_all_emissions.py
 ```
 
 ## Contributors
