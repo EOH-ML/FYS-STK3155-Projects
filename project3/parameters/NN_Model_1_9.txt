@@ -1,0 +1,31 @@
+Model Architecture:
+NN_Model_1(
+  (fc1): Linear(in_features=75, out_features=64, bias=True)
+  (fc2): Linear(in_features=64, out_features=11, bias=True)
+  (fc3): Linear(in_features=11, out_features=4, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: RMSprop
+Hyperparameters:
+  lr: 0.01
+  eps: 1e-08
+  weight_decay: 0
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+fc1.weight: [64, 75]
+fc1.bias: [64]
+fc2.weight: [11, 64]
+fc2.bias: [11]
+fc3.weight: [4, 11]
+fc3.bias: [4]
+
+Train mice:
+['trial_11_mouse_evm6.csv', 'trial_12_mouse_evm6.csv', 'trial_13_mouse_evm1.csv', 'trial_14_mouse_evm1.csv', 'trial_16_mouse_evm2.csv', 'trial_15_mouse_evm2.csv', 'trial_19_mouse_evm4.csv', 'trial_20_mouse_evm4.csv', 'trial_21_mouse_evm4.csv', 'trial_24_mouse_evm1.csv', 'trial_25_mouse_evm1.csv', 'trial_26_mouse_evm2.csv', 'trial_27_mouse_evm2.csv']
+Test mice:
+['trial_8_mouse_b2wtm2.csv', 'trial_18_mouse_evf3.csv']
+Val mice:
+['trial_5_mouse_b2aqm2.csv', 'trial_2_mouse_b1aqm1.csv']

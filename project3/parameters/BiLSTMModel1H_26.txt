@@ -1,0 +1,44 @@
+Model Architecture:
+BiLSTMModel1H(
+  (lstm): LSTM(5, 128, num_layers=2, batch_first=True, dropout=0.5, bidirectional=True)
+  (fc): Linear(in_features=256, out_features=5, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: Adam
+Hyperparameters:
+  lr: 0.001
+  betas: (0.9, 0.999)
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+lstm.weight_ih_l0: [512, 5]
+lstm.weight_hh_l0: [512, 128]
+lstm.bias_ih_l0: [512]
+lstm.bias_hh_l0: [512]
+lstm.weight_ih_l0_reverse: [512, 5]
+lstm.weight_hh_l0_reverse: [512, 128]
+lstm.bias_ih_l0_reverse: [512]
+lstm.bias_hh_l0_reverse: [512]
+lstm.weight_ih_l1: [512, 256]
+lstm.weight_hh_l1: [512, 128]
+lstm.bias_ih_l1: [512]
+lstm.bias_hh_l1: [512]
+lstm.weight_ih_l1_reverse: [512, 256]
+lstm.weight_hh_l1_reverse: [512, 128]
+lstm.bias_ih_l1_reverse: [512]
+lstm.bias_hh_l1_reverse: [512]
+fc.weight: [5, 256]
+fc.bias: [5]
+
+Train mice:
+['trial_11_mouse_evm6.csv', 'trial_12_mouse_evm6.csv', 'trial_13_mouse_evm1.csv', 'trial_14_mouse_evm1.csv', 'trial_16_mouse_evm2.csv', 'trial_15_mouse_evm2.csv', 'trial_19_mouse_evm4.csv', 'trial_20_mouse_evm4.csv', 'trial_21_mouse_evm4.csv', 'trial_24_mouse_evm1.csv', 'trial_25_mouse_evm1.csv', 'trial_26_mouse_evm2.csv', 'trial_27_mouse_evm2.csv']
+Test mice:
+['trial_8_mouse_b2wtm2.csv', 'trial_18_mouse_evf3.csv']
+Val mice:
+['trial_5_mouse_b2aqm2.csv', 'trial_2_mouse_b1aqm1.csv']

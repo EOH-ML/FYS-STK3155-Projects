@@ -1,0 +1,60 @@
+Model Architecture:
+BiLSTMModel1H(
+  (lstm): LSTM(9, 64, num_layers=4, batch_first=True, dropout=0.5, bidirectional=True)
+  (fc): Linear(in_features=128, out_features=5, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: Adam
+Hyperparameters:
+  lr: 0.005
+  betas: (0.9, 0.999)
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+lstm.weight_ih_l0: [256, 9]
+lstm.weight_hh_l0: [256, 64]
+lstm.bias_ih_l0: [256]
+lstm.bias_hh_l0: [256]
+lstm.weight_ih_l0_reverse: [256, 9]
+lstm.weight_hh_l0_reverse: [256, 64]
+lstm.bias_ih_l0_reverse: [256]
+lstm.bias_hh_l0_reverse: [256]
+lstm.weight_ih_l1: [256, 128]
+lstm.weight_hh_l1: [256, 64]
+lstm.bias_ih_l1: [256]
+lstm.bias_hh_l1: [256]
+lstm.weight_ih_l1_reverse: [256, 128]
+lstm.weight_hh_l1_reverse: [256, 64]
+lstm.bias_ih_l1_reverse: [256]
+lstm.bias_hh_l1_reverse: [256]
+lstm.weight_ih_l2: [256, 128]
+lstm.weight_hh_l2: [256, 64]
+lstm.bias_ih_l2: [256]
+lstm.bias_hh_l2: [256]
+lstm.weight_ih_l2_reverse: [256, 128]
+lstm.weight_hh_l2_reverse: [256, 64]
+lstm.bias_ih_l2_reverse: [256]
+lstm.bias_hh_l2_reverse: [256]
+lstm.weight_ih_l3: [256, 128]
+lstm.weight_hh_l3: [256, 64]
+lstm.bias_ih_l3: [256]
+lstm.bias_hh_l3: [256]
+lstm.weight_ih_l3_reverse: [256, 128]
+lstm.weight_hh_l3_reverse: [256, 64]
+lstm.bias_ih_l3_reverse: [256]
+lstm.bias_hh_l3_reverse: [256]
+fc.weight: [5, 128]
+fc.bias: [5]
+
+Train mice:
+['trial_11_mouse_evm6.csv', 'trial_10_mouse_evf3.csv', 'trial_15_mouse_evm2.csv']
+Test mice:
+['trial_13_mouse_evm1.csv']
+Val mice:
+['trial_14_mouse_evm1.csv']

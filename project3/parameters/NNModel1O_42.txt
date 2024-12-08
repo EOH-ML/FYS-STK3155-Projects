@@ -1,0 +1,34 @@
+Model Architecture:
+NNModel1O(
+  (fc1): Linear(in_features=124, out_features=64, bias=True)
+  (relu): ReLU()
+  (fc2): Linear(in_features=64, out_features=32, bias=True)
+  (fc3): Linear(in_features=32, out_features=4, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: Adam
+Hyperparameters:
+  lr: 0.001
+  betas: (0.9, 0.999)
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+fc1.weight: [64, 124]
+fc1.bias: [64]
+fc2.weight: [32, 64]
+fc2.bias: [32]
+fc3.weight: [4, 32]
+fc3.bias: [4]
+
+Train mice:
+['trial_11_mouse_evm6.csv', 'trial_10_mouse_evf3.csv', 'trial_15_mouse_evm2.csv']
+Test mice:
+['trial_13_mouse_evm1.csv']
+Val mice:
+['trial_14_mouse_evm1.csv']

@@ -1,0 +1,40 @@
+Model Architecture:
+CNN_Model_41W(
+  (_conv1): Conv2d(2, 8, kernel_size=(2, 2), stride=(1, 1), padding=(2, 2))
+  (_pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (_conv2): Conv2d(8, 8, kernel_size=(2, 2), stride=(1, 1))
+  (_fc1): Linear(in_features=80, out_features=64, bias=True)
+  (_fc2): Linear(in_features=64, out_features=16, bias=True)
+  (_fc3): Linear(in_features=16, out_features=4, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: Adam
+Hyperparameters:
+  lr: 0.001
+  betas: (0.9, 0.999)
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+_conv1.weight: [8, 2, 2, 2]
+_conv1.bias: [8]
+_conv2.weight: [8, 8, 2, 2]
+_conv2.bias: [8]
+_fc1.weight: [64, 80]
+_fc1.bias: [64]
+_fc2.weight: [16, 64]
+_fc2.bias: [16]
+_fc3.weight: [4, 16]
+_fc3.bias: [4]
+
+Train mice:
+['trial_11_mouse_evm6.csv', 'trial_12_mouse_evm6.csv', 'trial_13_mouse_evm1.csv', 'trial_14_mouse_evm1.csv', 'trial_16_mouse_evm2.csv', 'trial_15_mouse_evm2.csv', 'trial_19_mouse_evm4.csv', 'trial_20_mouse_evm4.csv', 'trial_21_mouse_evm4.csv', 'trial_24_mouse_evm1.csv', 'trial_25_mouse_evm1.csv', 'trial_26_mouse_evm2.csv', 'trial_27_mouse_evm2.csv']
+Test mice:
+['trial_8_mouse_b2wtm2.csv', 'trial_18_mouse_evf3.csv']
+Val mice:
+['trial_5_mouse_b2aqm2.csv', 'trial_2_mouse_b1aqm1.csv']

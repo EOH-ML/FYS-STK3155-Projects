@@ -1,0 +1,34 @@
+Model Architecture:
+SleepScoringCNN_1O(
+  (_conv1): Conv2d(2, 8, kernel_size=(2, 2), stride=(1, 1), padding=(1, 1))
+  (_pool): MaxPool2d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+  (_conv2): Conv2d(8, 16, kernel_size=(2, 2), stride=(1, 1))
+  (_fc1): Linear(in_features=1984, out_features=128, bias=True)
+  (_fc2): Linear(in_features=128, out_features=16, bias=True)
+  (_fc3): Linear(in_features=16, out_features=4, bias=True)
+)
+
+Optimizer Details:
+Optimizer Type: Adam
+Hyperparameters:
+  lr: 0.001
+  betas: (0.9, 0.999)
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+Loss Function:
+CrossEntropyLoss
+
+Model Parameters:
+_conv1.weight: [8, 2, 2, 2]
+_conv1.bias: [8]
+_conv2.weight: [16, 8, 2, 2]
+_conv2.bias: [16]
+_fc1.weight: [128, 1984]
+_fc1.bias: [128]
+_fc2.weight: [16, 128]
+_fc2.bias: [16]
+_fc3.weight: [4, 16]
+_fc3.bias: [4]
+
