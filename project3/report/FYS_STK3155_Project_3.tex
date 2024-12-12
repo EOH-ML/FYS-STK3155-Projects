@@ -120,7 +120,7 @@ An opening in the mouse models’ skull revealing the brain’s blood vessels is
 \begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{figures/mouse_scope2.eps} 
-    \caption{A two-photon microscope photographs the brain of a mouse, showing the vascular contractions during different sleep stages. By attaching Electrocorticography (EcOG)-electrodes on the model, brainwave activity can be measured in real time. In parallel, electromyography (EMG) electrodes are mounted on the model’s neck musculature, tracking the mouse model’s movement. Both the EcOG and EMG data is used in manual sleep scoring. \textbf{Illustration of mouse:} \textit{BioRender}, used with an Open Source permission. }
+    \caption{A two-photon microscope photographs the brain of a mouse, showing the vascular contractions during different sleep stages. By attaching Electrocorticography (EcOG)-electrodes on the model, brainwave activity can be measured in real time. In parallel, electromyography (EMG) electrodes are mounted on the model’s neck musculature, tracking the mouse model’s movement. Both the EcOG and EMG data is used in manual sleep scoring. \textbf{Illustration of mouse:} \textit{BioRender}, used with an Open Source permission.}
     \label{fig:mouse_fig}
 \end{figure}
 
@@ -202,11 +202,11 @@ The trials are organized into multiple files, each named in the format \texttt{t
 The sleep scoring trials include multiple stretches labeled as \texttt{unknown}, indicating epochs without a class label, where the sleep stage has not been manually scored. All instances of \texttt{unknown} are removed from the dataset, as they do not contribute meaningful information for our training.
 
 \subsubsection*{Inspecting the Dataset}
-We start by setting up a Jupyter Notebook (found in the \href{https://github.com/EOH-ML/FYS-STK3155-Projects/tree/main/project3}{\texttt{Project GitHub Repository}}) to gain more insight into the data at hand. Pandas' \texttt{.describe()} function \cite{mckinney_data_2010} provides us with the mean, standard deviation, minimum and maximum values, as well as the quartiles. This gives us a first glance at the data, informing us about possible artifacts (i.e., outliers) that need to be addressed. 
+We start by setting up a Jupyter Notebook (found in the \href{https://github.com/EOH-ML/FYS-STK3155-Projects/tree/main/project3}{\texttt{Project GitHub Repository}}) to gain more insight into the data at hand. Pandas' \texttt{.describe()} function \cite{mckinney_data_2010} (\hyperref[fig:statistic]{Figure~\ref*{fig:statistic}}) provides us with the mean, standard deviation, minimum and maximum values, as well as the quartiles. This gives us a first glance at the data, informing us about possible artifacts (i.e., outliers) that need to be addressed.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/statistical.png} 
-    \caption{Facsimile of Pandas' \texttt{.inspect()} function printout. Please refer to the Jupyter Notebook for more details.}
+    \caption{Facsimile of Pandas' \texttt{.describe()} function printout. Please refer to the Jupyter Notebook for all the details.}
     \label{fig:statistic}
 \end{figure}
 
