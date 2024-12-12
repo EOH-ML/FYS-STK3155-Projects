@@ -76,7 +76,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Håkon la inn denne tittelen bare for å være i gang, selv om det ikke er sikkert at det er sånn vi vil gjøre det
-\title{Sleep Scoring in Alzheimer Mouse Models: Comparing Traditional and Spatial Approaches using Feed Forward and Convolusional Neural Networks}
+\title{Sleep Scoring in Alzheimer Mouse Models: Comparing Traditional and Spatial Approaches using Feed Forward and Convolutional Neural Networks}
 
 \author{Oscar Atle Brovold, Eskil Grinaker Hansen, Håkon Ganes Kornstad}
 \date{December 8, 2024}
@@ -93,7 +93,7 @@
 
 \begin{abstract}
 \noindent 
-It is established that sleep plays a role in Alzheimer’s Disease, influencing processes that may impact disease progression. Sleep scoring, vital for understanding these mechanisms, is typically labor-intensive and performed manually. Automating sleep scoring with machine learning is therefore potentially a great tool for improving the efficiency in Alzheimer research. We build two machine learning models for sleep scoring in mice based on the same dataset of 14 different test mouse models from trials measuring brainwaves with electrocorticography (ECoG) and muscle activities with Electromyography (EMG). We train our Feed Forward Neural Network (FFNN) in tandem with an extensive feature engineering, yielding an overall accuracy of 87\%, as well as 67\% and 48\% on IS and REM, respectively. Then we compare it to a CNN-model with two convolution layers, kernel size \texttt{(2, 2)} and \texttt{MaxPooling}, using ReLU as activation function in the dense layers. It is trained on plots of ECoG and EMG in the frequency domain, and yields an overall accuracy of 92\%, and sleep stage individual F1-scores of 74\% and 69\% on Intermediate Sleep (IS) and REM, respectively. We conclude that while FFNNs can effectively learn diverse tasks, the CNN outperforms it in our testing. We propose this is due to the CNN's ability to extract spatial patterns from frequency-domain data, making it better suited for sleep scoring.
+It is established that sleep plays a role in Alzheimer’s Disease, influencing processes that may impact disease progression. Sleep scoring, vital for understanding these mechanisms, is typically labor-intensive and performed manually. Automating sleep scoring with machine learning is therefore potentially a great tool for improving the efficiency in Alzheimer research. We build two machine learning models for sleep scoring in mice based on the same dataset of 14 different test mouse models. Datasets are from trials measuring brainwaves with Electrocorticography (ECoG) and muscle activities with Electromyography (EMG). We train our Feed Forward Neural Network (FFNN) in tandem with an extensive feature engineering, yielding an overall accuracy of 87\%, as well as F1-scores of 67\% and 48\% on Intermediate Sleep (IS) and REM, respectively. Then we compare it to a CNN-model with two convolution layers, kernel size \texttt{(2, 2)} and \texttt{MaxPooling}, using ReLU as activation function in the dense layers. It is trained on plots of ECoG and EMG in the frequency domain, and yields an overall accuracy of 92\%, and sleep stage individual F1-scores of 74\% and 69\% on IS and REM, respectively. We conclude that while FFNNs can effectively learn diverse tasks, the CNN outperforms it in our testing. We propose this is due to the CNN's ability to extract spatial patterns from frequency-domain data, making it better suited for sleep scoring.
 
 % We conclude that a further extension of the CNN-model using a Hidden Markov Model (HMM), as well as more high definition data could further improve the results.
 \end{abstract}
@@ -120,16 +120,16 @@ An opening in the mouse models’ skull revealing the brain’s blood vessels is
 \begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{figures/mouse_scope2.eps} 
-    \caption{A two-photon microscope photographs the brain of a mouse, showing the vascular contractions during different sleep stages. By attaching Electrocorticography (EcOG)-electrodes on the model, brainwave activity can be measured in real time. In parallel, electromyography (EMG) electrodes are mounted on the model’s neck musculature, tracking the mouse model’s movement. Both the EcOG and EMG data is used in manual sleep scoring. \textbf{Illustration of mouse:} \textit{BioRender}, used with an Open Source permission. \cite{noauthor_scientific_nodate}} 
+    \caption{A two-photon microscope photographs the brain of a mouse, showing the vascular contractions during different sleep stages. By attaching Electrocorticography (EcOG)-electrodes on the model, brainwave activity can be measured in real time. In parallel, electromyography (EMG) electrodes are mounted on the model’s neck musculature, tracking the mouse model’s movement. Both the EcOG and EMG data is used in manual sleep scoring. \textbf{Illustration of mouse:} \textit{BioRender}, used with an Open Source permission. }
     \label{fig:mouse_fig}
 \end{figure}
 
 \section*{Sleep Scoring}
 \subsubsection*{Electrocorticography (ECoG)}
-ECoG is a method for measuring electrical activity in the brain. Unlike EEG, where electrodes are placed \textit{on} the scalp, ECoG electrodes are placed directly on the surface of the cerebral cortex through surgery. This provides ECoG with better spatial resolution and stronger signal strength compared to EEG, making it less susceptible to artifacts such as noise. \cite{noauthor_electrocorticography_nodate}
+ECoG is a method for measuring electrical activity in the brain. Unlike EEG, where electrodes are placed \textit{on} the scalp, ECoG electrodes are placed directly on the surface of the cerebral cortex through surgery. This provides ECoG with better spatial resolution and stronger signal strength compared to EEG, making it less susceptible to artifacts such as noise. \cite{halnes_electric_2024}
 
 \subsubsection*{Electromyography (EMG)}
-The electromyogram (EMG) measures electrical activity in muscles, and thereby tracking movement across different sleep stages. An electrode is mounted on the neck musculature to infer changes in motor activity associated with wakefulness, non-rapid eye movement (NREM), and rapid eye movement (REM) sleep. During wakefulness, EMG signals typically exhibit high-amplitude, irregular bursts due to active movement. \cite{noauthor_electromyography_nodate} In contrast, NREM sleep is characterized by a reduction in muscle tone, with lower-amplitude, more stable EMG signals. REM sleep is marked by a near-complete loss of muscle tone, resulting in minimal or absent EMG activity. \cite{noauthor_electromyography_nodate}
+The electromyogram (EMG) measures electrical activity in muscles, and thereby tracking movement across different sleep stages. An electrode is mounted on the neck musculature to infer changes in motor activity associated with wakefulness, non-rapid eye movement (NREM), and rapid eye movement (REM) sleep. During wakefulness, EMG signals typically exhibit high-amplitude, irregular bursts due to active movement. In contrast, NREM sleep is characterized by a reduction in muscle tone, with lower-amplitude, more stable EMG signals. REM sleep is marked by a near-complete loss of muscle tone, resulting in minimal or absent EMG activity. \cite{engstrom_elektromyografi_2024}
 
 \subsection*{Machine Learning based Sleep Scoring Setups}
 Machine learning for sleep scoring has been explored for decades. However, it remains challenging to develop models that perform well across the diverse genetic backgrounds of mouse models and their varied research environments. Similarly, these models often fail to generalize to other mammals, making them unsuitable for human sleep scoring. Despite these challenges, the significant amount of time spent annually by research groups on manual sleep scoring makes it worthwhile to continue pursuing automated approaches. \cite{alizadeh_savareh_performance_2018}
@@ -281,7 +281,7 @@ For the \textbf{network structure}, we experiment with various architectures, in
 
 From these preliminary tests, we observe that hyperparameter tuning has minimal impact on the weighted precision. However, altering window size and feature engineering lead to notable variability in the accuracy distribution across the model's sleep stage classes. These findings are detailed in the accompanying \texttt{.csv} and \texttt{.txt}, and will be further discussed below. 
 
-We use \textbf{cross entropy loss} \cite{brovold_less_2024} \cite{hastie_elements_2009} as cost/loss function for all training in this model.
+We use \textbf{cross entropy loss} \cite{brovold_less_2024} \cite{hastie_elements_2009} as cost/loss function for training all models.
 
 \end{multicols}
 \section*{Training with a Feed Forward Neural Network}
